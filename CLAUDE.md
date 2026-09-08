@@ -18,7 +18,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Tech Stack
 
 - **Database:** MongoDB (via Spring Data MongoDB)
-- **Backend language/framework:** Java 21, Spring Boot
+- **Backend language/framework:** Java 25, Spring Boot
 - **Build tool:** Gradle
 - **LLM integration:** Anthropic API (Claude), called via [ASSUMPTION: Java HTTP client / Anthropic Java SDK — confirm which]
 
