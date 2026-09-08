@@ -9,10 +9,11 @@ Tracks remaining work for the Support Ticket Analyzer. Check items off as they l
 - [x] `TicketRepository`
 - [x] `TicketController` — `POST /api/tickets` endpoint, returns full saved `Ticket` (caller gets generated `_id`)
 - [x] Response shape: full ticket object
+- [x] Request validation (non-blank subject/body, `customerId` UUID format, `channel` restricted to email/web_form/chat) — returns 400 with field-level messages
 
 ## Ticket intake
 
-- [ ] Request validation (non-blank subject/body, allowed `channel` values)
+Intake is functionally complete pending real MongoDB wiring; move to Ticket analysis next.
 
 ## Ticket analysis
 
