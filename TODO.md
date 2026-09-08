@@ -40,5 +40,5 @@ Intake is functionally complete pending real MongoDB wiring; move to Ticket anal
 
 ## Config / ops
 
-- [ ] `MONGODB_URI` / `ANTHROPIC_API_KEY` set up per environment (see README)
+- [x] `.env` / `.env.example` workflow via spring-dotenv (see README) — each dev still needs their own MongoDB Atlas cluster + connection string
 - [ ] Confirm downstream consumers (dashboards/routing/alerting) — CLAUDE.md overview is still marked as pending this
