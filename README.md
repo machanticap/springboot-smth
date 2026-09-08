@@ -26,41 +26,50 @@ Customer → Ticket (MongoDB) → Claude Analysis → Enriched Result (MongoDB)
 
 ## Tech Stack
 
-- **Database:** MongoDB
-- **Backend:** [Node.js / Python — fill in]
+- **Database:** MongoDB (via Spring Data MongoDB)
+- **Backend:** Java 21, Spring Boot
+- **Build tool:** Gradle
 - **AI:** Anthropic Claude API
 
 ## Getting Started
 
 ### Prerequisites
 
+- Java 21 (JDK)
+- No separate Gradle install needed — use the included `./gradlew` wrapper (Gradle 8.14.5)
 - MongoDB instance (local or hosted, e.g. MongoDB Atlas)
 - Anthropic API key
-- [Node.js 18+ / Python 3.10+ — fill in]
 
 ### Installation
 
 ```bash
 git clone <repo-url>
 cd support-ticket-analyzer
-[npm install / pip install -r requirements.txt]
+./gradlew build
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+Spring Boot reads configuration from `src/main/resources/application.properties` (or `application.yml`). Use environment variable placeholders so secrets aren't committed:
 
-```
-MONGODB_URI=your_mongodb_connection_string
-ANTHROPIC_API_KEY=your_api_key
+```properties
+spring.data.mongodb.uri=${MONGODB_URI}
+anthropic.api.key=${ANTHROPIC_API_KEY}
 ```
 
-> Never commit your `.env` file. Add it to `.gitignore`.
+Then set the actual values as environment variables (or in a local `application-local.properties` that's git-ignored):
+
+```bash
+export MONGODB_URI=your_mongodb_connection_string
+export ANTHROPIC_API_KEY=your_api_key
+```
+
+> Never commit real credentials. Add `application-local.properties` and any `.env` files to `.gitignore`.
 
 ### Running the Project
 
 ```bash
-[npm run dev / python main.py]
+./gradlew bootRun
 ```
 
 ## Data Model
@@ -101,11 +110,24 @@ ANTHROPIC_API_KEY=your_api_key
 
 ```
 support-ticket-analyzer/
-├── CLAUDE.md              # Guidance for Claude Code when working in this repo
-├── README.md              # This file
-├── src/                   # Application source code
-├── prompts/               # Claude prompt templates
-└── .env.example           # Environment variable template
+├── CLAUDE.md                          # Guidance for Claude Code when working in this repo
+├── README.md                          # This file
+├── build.gradle                       # Gradle project config
+├── settings.gradle                    # Gradle project settings
+├── gradlew / gradlew.bat              # Gradle wrapper scripts
+├── gradle/wrapper/                    # Gradle wrapper jar + properties
+└── src/
+    ├── main/
+    │   ├── java/com/example/ticketanalyzer/
+    │   │   ├── model/                 # MongoDB document classes
+    │   │   ├── repository/            # Spring Data MongoDB repositories
+    │   │   ├── service/               # Business logic + Claude integration
+    │   │   └── controller/            # REST endpoints (if applicable)
+    │   └── resources/
+    │       ├── application.properties
+    │       └── prompts/                # Claude prompt templates
+    └── test/
+        └── java/com/example/ticketanalyzer/
 ```
 
 ## Status
@@ -115,3 +137,6 @@ support-ticket-analyzer/
 ## License
 
 [MIT / choose a license]
+
+---
+*This is a practice/learning project, not intended for production use.*

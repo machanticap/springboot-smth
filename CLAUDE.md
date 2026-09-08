@@ -17,10 +17,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Tech Stack
 
-- **Database:** MongoDB
-- **Backend language/framework:** [ASSUMPTION — e.g., Node.js/Express or Python/FastAPI — fill in]
-- **LLM integration:** Anthropic API (Claude), called via [ASSUMPTION: direct SDK call / batch job / queue worker]
-- **Package manager:** [fill in — npm/pip/poetry/etc.]
+- **Database:** MongoDB (via Spring Data MongoDB)
+- **Backend language/framework:** Java 21, Spring Boot
+- **Build tool:** Gradle
+- **LLM integration:** Anthropic API (Claude), called via [ASSUMPTION: Java HTTP client / Anthropic Java SDK — confirm which]
 
 ## Data Model (MongoDB)
 
@@ -76,16 +76,18 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Core Workflow / Common Commands
 
 ```bash
-# [fill in actual commands once implemented]
-npm run dev              # start the analyzer service locally
-npm run test             # run test suite
-npm run process-ticket -- --id <ticket_id>   # manually trigger analysis for one ticket
+./gradlew bootRun                            # start the analyzer service locally
+./gradlew test                               # run test suite
+./gradlew build                              # build the jar
+java -jar build/libs/ticket-analyzer-0.0.1-SNAPSHOT.jar # run the built jar
 ```
 
 ## Coding Conventions
 
-- [fill in: linting rules, naming conventions, error handling patterns]
-- Keep the Claude prompt (system prompt / instructions for summarization+classification) in a single, version-controlled file (e.g. `prompts/ticket_analysis_prompt.md`) rather than inline strings scattered across the codebase.
+- Follow standard Java naming conventions (PascalCase for classes, camelCase for methods/fields).
+- Use Spring's constructor injection over field injection (`@Autowired` on fields) for testability.
+- Keep MongoDB documents mapped via `@Document`-annotated model classes in a dedicated `model` package; keep repositories (`MongoRepository` interfaces) in a `repository` package.
+- Keep the Claude prompt (system prompt / instructions for summarization+classification) in a single, version-controlled resource file (e.g. `src/main/resources/prompts/ticket_analysis_prompt.md`) rather than inline strings scattered across the codebase.
 - Log the raw Claude response alongside the parsed result for auditability, but never log full ticket bodies containing PII to plaintext files without redaction.
 
 ## Things to Avoid
