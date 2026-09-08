@@ -5,7 +5,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Project Overview
 
 **Support Ticket Analyzer** — an automated pipeline that:
-1. Receives customer support tickets (submitted via [ASSUMPTION: web form / API — confirm intake channel])
+1. Receives customer support tickets (submitted via API)
 2. Stores raw tickets in MongoDB
 3. Uses Claude to:
    - Summarize the issue in plain language
@@ -29,7 +29,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 ```json
 {
   "_id": "ObjectId",
-  "customer_id": "string",
+  "customer_id": "string",   // UUID (validated on Ticket construction)
   "subject": "string",
   "body": "string",
   "submitted_at": "ISODate",
@@ -57,7 +57,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Classification Taxonomy
 
-**Categories** [ASSUMPTION — replace with your real taxonomy]:
+**Categories:**
 - `Billing`
 - `Technical Issue`
 - `Account Access`
@@ -65,7 +65,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `Bug Report`
 - `General Inquiry`
 
-**Severity levels** [ASSUMPTION — replace with your real rubric]:
+**Severity levels:**
 - `Critical` — service outage, data loss, security issue, blocking all users
 - `High` — major feature broken, no workaround, affects many customers
 - `Medium` — feature partially broken, workaround exists
