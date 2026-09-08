@@ -4,14 +4,14 @@ Tracks remaining work for the Support Ticket Analyzer. Check items off as they l
 
 ## Done
 
-- [x] Gradle scaffold (Spring Boot 3.4.13, Java 21 toolchain, Spring Data MongoDB/Web/Validation/Actuator)
+- [x] Gradle scaffold (Spring Boot 3.4.13, Java 25 toolchain, Spring Data MongoDB/Web/Validation/Actuator)
 - [x] `Ticket` model + `TicketStatus` enum (`customer_id` validated as UUID on construction)
 - [x] `TicketRepository`
+- [x] `TicketController` — `POST /api/tickets` endpoint, returns full saved `Ticket` (caller gets generated `_id`)
+- [x] Response shape: full ticket object
 
 ## Ticket intake
 
-- [ ] `TicketController` — `POST` endpoint to create a ticket, persist via `TicketRepository`
-- [ ] Decide response shape (full ticket, id only, or a bare ack)
 - [ ] Request validation (non-blank subject/body, allowed `channel` values)
 
 ## Ticket analysis

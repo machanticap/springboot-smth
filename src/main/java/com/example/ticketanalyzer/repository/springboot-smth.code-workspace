@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../.."
+		},
+		{
+			"name": "spring-petclinic",
+			"path": "../../../../../../../spring-petclinic"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}
