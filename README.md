@@ -27,7 +27,7 @@ Customer → Ticket (MongoDB) → Claude Analysis → Enriched Result (MongoDB)
 ## Tech Stack
 
 - **Database:** MongoDB (via Spring Data MongoDB)
-- **Backend:** Java 21, Spring Boot
+- **Backend:** Java 25, Spring Boot
 - **Build tool:** Gradle
 - **AI:** Anthropic Claude API
 
@@ -35,7 +35,7 @@ Customer → Ticket (MongoDB) → Claude Analysis → Enriched Result (MongoDB)
 
 ### Prerequisites
 
-- Java 21 (JDK)
+- Java 25 (JDK)
 - No separate Gradle install needed — use the included `./gradlew` wrapper (Gradle 8.14.5)
 - MongoDB instance (local or hosted, e.g. MongoDB Atlas)
 - Anthropic API key
