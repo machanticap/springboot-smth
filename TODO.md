@@ -19,10 +19,12 @@ Intake is functionally complete pending real MongoDB wiring; move to Ticket anal
 
 - [x] `TicketAnalysis` model + repository (`category`/`severity` as enums matching the CLAUDE.md taxonomy, never free-form) — `findByTicketIdOrderByAnalyzedAtDesc` added to support querying re-analysis history
 - [x] Confirm Claude client: Anthropic Java SDK (`com.anthropic:anthropic-java:2.61.0`) — chosen for built-in structured outputs, typed retries/errors, and automatic `.env` API key pickup
-- [ ] `src/main/resources/prompts/ticket_analysis_prompt.md` per coding conventions
-- [ ] Service that calls Claude, parses the response into summary/category/severity, and enforces the fixed taxonomy
-- [ ] Versioning/timestamping strategy for re-analysis (never silently overwrite `ticket_analysis`)
-- [ ] Log the raw Claude response for auditability without logging unredacted PII ticket bodies
+- [x] `src/main/resources/prompts/ticket_analysis_prompt.md` per coding conventions
+- [x] `TicketAnalysisService` — calls Claude via the SDK's structured outputs (`TicketAnalysisResult` record), enforcing `Category`/`Severity` as real enums so Claude cannot return an invented label
+- [x] `POST /api/tickets/{id}/analyze` — manual trigger endpoint; marks the ticket `PROCESSED` on success, `ERROR` on failure
+- [x] Versioning/timestamping: each analysis is a new inserted document (never an update-in-place), so re-analysis never silently overwrites; `findByTicketIdOrderByAnalyzedAtDesc` retrieves history
+- [x] Logs the raw Claude response (`TicketAnalysisService`) for auditability — only the response is logged, never the outgoing ticket body
+- [ ] **Blocked:** end-to-end verification against a live Claude call — the Capgemini-provisioned Anthropic API key returns `401 invalid` (key format/wiring confirmed correct via diagnostic logging in `AnthropicConfig`; likely a billing/provisioning issue on the account, needs internal follow-up). Remove the temporary diagnostic logging in `AnthropicConfig` once resolved.
 
 ## Processing trigger (unconfirmed)
 

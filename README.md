@@ -57,20 +57,14 @@ spring.data.mongodb.uri=${MONGODB_URI}
 anthropic.api.key=${ANTHROPIC_API_KEY}
 ```
 
-The project uses [spring-dotenv](https://github.com/paulschwarz/spring-dotenv) to auto-load a local `.env` file into Spring's environment, so you don't need to `export` these manually every session — it works the same whether you run via `./gradlew bootRun`, your IDE's Run button, or a terminal.
-
-```bash
-cp .env.example .env
-```
-
-Then edit `.env` and fill in your real values:
+Create an `.env` file and fill in your real values:
 
 ```
 MONGODB_URI=your_mongodb_connection_string
 ANTHROPIC_API_KEY=your_api_key
 ```
 
-> `.env` is git-ignored — never commit real credentials. `.env.example` is the tracked template; keep it in sync with whatever variables the app actually reads.
+> `.env` is git-ignored — never commit real credentials.
 
 ### Running the Project
 
