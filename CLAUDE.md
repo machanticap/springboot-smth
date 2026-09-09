@@ -20,7 +20,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Database:** MongoDB (via Spring Data MongoDB)
 - **Backend language/framework:** Java 25, Spring Boot
 - **Build tool:** Gradle
-- **LLM integration:** Anthropic API (Claude), called via [ASSUMPTION: Java HTTP client / Anthropic Java SDK — confirm which]
+- **LLM integration:** Anthropic API (Claude), called via the official Anthropic Java SDK (`com.anthropic:anthropic-java`) — chosen for built-in structured outputs (enforces the fixed category/severity taxonomy below), typed retry/error handling, and automatic `ANTHROPIC_API_KEY` pickup from the `.env`-based local config
 
 ## Data Model (MongoDB)
 
