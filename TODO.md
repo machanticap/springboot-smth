@@ -17,7 +17,7 @@ Intake is functionally complete pending real MongoDB wiring; move to Ticket anal
 
 ## Ticket analysis
 
-- [ ] `TicketAnalysis` model + repository (`category`/`severity` as enums matching the CLAUDE.md taxonomy, never free-form)
+- [x] `TicketAnalysis` model + repository (`category`/`severity` as enums matching the CLAUDE.md taxonomy, never free-form) — `findByTicketIdOrderByAnalyzedAtDesc` added to support querying re-analysis history
 - [ ] Confirm Claude client: raw HTTP vs Anthropic Java SDK — open `[ASSUMPTION]` in CLAUDE.md
 - [ ] `src/main/resources/prompts/ticket_analysis_prompt.md` per coding conventions
 - [ ] Service that calls Claude, parses the response into summary/category/severity, and enforces the fixed taxonomy
